@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import AddPlant from './components/AddPlant';
 import logo from './assets/logo.png';
 import './App.css';
 
+
 function App() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const isAuthenticated = localStorage.getItem('authenticated');
+
+    if (!isAuthenticated) {
+      navigate('/login', { replace: true });
+    }
+  }, [navigate]);
+  
   return (
     <div className="App">
       <header className="App-header">
